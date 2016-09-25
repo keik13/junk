@@ -1,2 +1,4 @@
 # junk
-code playground
+code playground, 
+code learning,
+some junk..
