@@ -19,7 +19,7 @@ package module3;
  * <p>
  * Created by Andrey on 25.09.2016.
  */
-final class ComplexNumber {
+/*public*/ final class ComplexNumber {
     private final double re;
     private final double im;
 
@@ -51,3 +51,9 @@ final class ComplexNumber {
     }
 }
 
+/**
+ * stub class
+ */
+public class Step3_4_9 {
+
+}
