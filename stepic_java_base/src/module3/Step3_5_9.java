@@ -81,7 +81,7 @@ public class Step3_5_9 {
         }
     }
 
-    class SpamAnalyzer extends KeywordAnalyzer implements TextAnalyzer {
+    class SpamAnalyzer extends KeywordAnalyzer {
         private final String[] keywords;
 
         public SpamAnalyzer(String[] keywords) {
@@ -99,7 +99,7 @@ public class Step3_5_9 {
         }
     }
 
-    class NegativeTextAnalyzer extends KeywordAnalyzer implements TextAnalyzer {
+    class NegativeTextAnalyzer extends KeywordAnalyzer {
         private final String[] sadSmiles = {":(", " =(", ":|"};
 
         @Override
