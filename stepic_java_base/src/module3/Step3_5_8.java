@@ -20,23 +20,35 @@ package module3;
  */
 
 /*public*/ class AsciiCharSequence implements CharSequence {
+    private byte[] ASCIIchar;
+
+    public AsciiCharSequence(byte[] ASCIIchar) {
+        this.ASCIIchar = ASCIIchar;
+    }
+
     @Override
     public int length() {
-        return 0;
+        return ASCIIchar.length;
     }
 
     @Override
     public char charAt(int index) {
-        return 0;
+        return (char) ASCIIchar[index];
     }
 
     @Override
     public CharSequence subSequence(int start, int end) {
-        return null;
+        byte[] subArr = new byte[end - start];
+        System.arraycopy(this.ASCIIchar, start, subArr, 0, end - start);
+        return new AsciiCharSequence(subArr);
     }
 
     public String toString() {
-        return super.toString();
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < ASCIIchar.length; i++) {
+            result.append((char) ASCIIchar[i]);
+        }
+        return result.toString();
     }
 }
 
