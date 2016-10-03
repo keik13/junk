@@ -182,6 +182,27 @@ package module4;
  * Created by Andrey on 04.10.2016.
  */
 public class Step4_3_9 {
+    public static class UntrustworthyMailWorker implements MailService {
+        RealMailService realMailService = new RealMailService();
+        MailService[] mailServices;
+
+        public UntrustworthyMailWorker(MailService[] mailServices) {
+            this.mailServices = mailServices;
+        }
+
+        public RealMailService getRealMailService() {
+            return realMailService;
+        }
+
+        @Override
+        public Sendable processMail(Sendable mail) {
+            for (MailService ms : mailServices) {
+                mail = ms.processMail(mail);
+            }
+            return realMailService.processMail(mail);
+        }
+    }
+
     /*
     Интерфейс: сущность, которую можно отправить по почте.
     У такой сущности можно получить от кого и кому направляется письмо.
@@ -197,21 +218,6 @@ public class Step4_3_9 {
     */
     public static interface MailService {
         Sendable processMail(Sendable mail);
-    }
-
-    public static class UntrustworthyMailWorker {
-        RealMailService realMailService = new RealMailService();
-
-        public UntrustworthyMailWorker(MailService[] mailServices, Sendable msg) {
-            for (MailService ms : mailServices) {
-                msg = ms.processMail(msg);
-            }
-            realMailService.processMail(msg);
-        }
-
-        public RealMailService getRealMailService() {
-            return realMailService;
-        }
     }
 
     /*
