@@ -1,5 +1,8 @@
 package module4;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Это задачка совмещает тренировку по материалу предыдущих двух модулей – необходимо разобраться и написать объект-ориентированный код и при этом коснуться свежих тем – исключений и логирования.
  * <p>
@@ -183,8 +186,8 @@ package module4;
  */
 public class Step4_3_9 {
     public static class UntrustworthyMailWorker implements MailService {
-        RealMailService realMailService = new RealMailService();
-        MailService[] mailServices;
+        private RealMailService realMailService = new RealMailService();
+        private MailService[] mailServices;
 
         public UntrustworthyMailWorker(MailService[] mailServices) {
             this.mailServices = mailServices;
@@ -202,6 +205,82 @@ public class Step4_3_9 {
             return realMailService.processMail(mail);
         }
     }
+
+    public static class Spy implements MailService {
+        private Logger logger;
+
+        public Spy(Logger logger) {
+            this.logger = logger;
+        }
+
+        @Override
+        public Sendable processMail(Sendable mail) {
+            if (mail instanceof MailMessage) {
+                if (AUSTIN_POWERS.equals(mail.getTo()) || AUSTIN_POWERS.equals(mail.getFrom())) {
+                    logger.log(Level.WARNING, "Detected target mail correspondence: from {0} to {1} \"{2}\"",
+                            new Object[]{mail.getFrom(), mail.getTo(), ((MailMessage) mail).getMessage()});
+                } else {
+                    logger.log(Level.INFO, "Usual correspondence: from {0} to {1}", new Object[]{mail.getFrom(), mail.getTo()});
+                }
+            }
+            return mail;
+        }
+    }
+
+    public static class Thief implements MailService {
+        private int minCost;
+        private int stolenValue;
+
+        public Thief(int minCost) {
+            this.minCost = minCost;
+        }
+
+        public int getStolenValue() {
+            return stolenValue;
+        }
+
+        @Override
+        public Sendable processMail(Sendable mail) {
+            if (mail instanceof MailPackage) {
+                MailPackage mp = (MailPackage) mail;
+                if (mp.getContent().getPrice() >= minCost) {
+                    stolenValue += mp.getContent().getPrice();
+                    return new MailPackage(mp.getFrom(), mp.getTo(), new Package("stones instead of " + mp.getContent().getContent(), 0));
+                }
+            }
+            return mail;
+        }
+    }
+
+    public static class Inspector implements MailService {
+
+        @Override
+        public Sendable processMail(Sendable mail) {
+            if (mail instanceof MailPackage) {
+                MailPackage mp = (MailPackage) mail;
+                if (WEAPONS.equals(mp.getContent().getContent()) || BANNED_SUBSTANCE.equals(mp.getContent().getContent())) {
+                    throw new IllegalPackageException();
+                }
+                if (mp.getContent().getContent().contains("stones")) {
+                    throw new StolenPackageException();
+                }
+            }
+            return mail;
+        }
+    }
+
+    public static class IllegalPackageException extends RuntimeException {
+
+    }
+
+    public static class StolenPackageException extends RuntimeException {
+
+    }
+
+
+    public static final String AUSTIN_POWERS = "Austin Powers";
+    public static final String WEAPONS = "weapons";
+    public static final String BANNED_SUBSTANCE = "banned substance";
 
     /*
     Интерфейс: сущность, которую можно отправить по почте.
