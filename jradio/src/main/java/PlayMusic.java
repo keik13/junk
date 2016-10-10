@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.net.URL;
 
 /**
+ * Simple internet radio ^_^
+ *
  * @author Andrey Koba)
  */
 
