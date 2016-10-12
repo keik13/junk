@@ -1,7 +1,6 @@
 package module5;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.charset.Charset;
 
 /**
@@ -18,7 +17,14 @@ import java.nio.charset.Charset;
 
 public class Step5_3_12 {
     public static String readAsString(InputStream inputStream, Charset charset) throws IOException {
-        // your implementation here
-        return null;
+        StringBuilder result = new StringBuilder();
+        try (Reader reader = new InputStreamReader(inputStream, charset)) {
+            char[] buf = new char[1024];
+            int count;
+            while ((count = reader.read(buf)) > 0) {
+                result.append(buf, 0, count);
+            }
+        }
+        return result.toString();
     }
 }
