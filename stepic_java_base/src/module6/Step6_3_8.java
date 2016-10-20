@@ -1,5 +1,6 @@
 package module6;
 
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -26,6 +27,18 @@ public class Step6_3_8 {
             Function<? super T, ? extends U> ifTrue,
             Function<? super T, ? extends U> ifFalse) {
         return (T t) -> condition.test(t) ? ifTrue.apply(t) : ifFalse.apply(t);
+    }
+
+    public static void main(String[] args) {
+        Predicate<Object> condition = Objects::isNull;
+        Function<Object, Integer> ifTrue = obj -> 0;
+        Function<CharSequence, Integer> ifFalse = CharSequence::length;
+        Function<String, Integer> safeStringLength = ternaryOperator(condition, ifTrue, ifFalse);
+        System.out.println(test(safeStringLength, "sss"));
+    }
+
+    static Integer test(Function<String, Integer> safeStringLength, String testString) {
+        return safeStringLength.apply(testString);
     }
 }
 
