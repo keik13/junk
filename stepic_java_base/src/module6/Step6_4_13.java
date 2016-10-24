@@ -1,10 +1,8 @@
 package module6;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -40,14 +38,20 @@ import java.util.stream.Stream;
  */
 public class Step6_4_13 {
     public static void main(String[] args) {
-        String myString = "Мама мыла-мыла-мыла раму!";
-        String myString2 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales consectetur purus at faucibus. Donec mi quam, tempor vel ipsum non, faucibus suscipit massa.\n" +
-                " * Morbi lacinia velit blandit tincidunt efficitur. Vestibulum eget\n" +
-                " * metus imperdiet sapien laoreet faucibus. Nunc eget vehicula mauris, ac auctor lorem. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-        try (Stream<String> stream = new BufferedReader(new InputStreamReader(/*System.in*/new ByteArrayInputStream(myString2.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8)).lines()) {
-            stream.flatMap(s -> Stream.of(s.split("[^\\wа-яА-Я]+"))).collect(Collectors.groupingBy(Function.identity(), Collectors.counting())).keySet().stream().limit(10).forEach(System.out::println);
-            //.forEach(System.out::println);
-
+        try (Stream<String> stream = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8)).lines()) {
+            stream.flatMap(s -> Stream.of(s.split("[^\\wа-яА-Я]+")))
+                    .collect(Collectors.groupingBy(String::toLowerCase, Collectors.counting()))
+                    .entrySet()
+                    .stream().sorted((e1, e2) -> {
+                if (e2.getValue().compareTo(e1.getValue()) != 0) {
+                    return e2.getValue().compareTo(e1.getValue());
+                } else {
+                    return e1.getKey().compareTo(e2.getKey());
+                }
+            })
+                    .map(e -> e.getKey())
+                    .limit(10)
+                    .forEach(System.out::println);
         }
     }
 }
