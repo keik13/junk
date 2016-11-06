@@ -1,8 +1,9 @@
 package com.yet.spring.core;
 
 import com.yet.spring.core.beans.Client;
+import com.yet.spring.core.events.Event;
 import com.yet.spring.core.loggers.EventLogger;
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -20,15 +21,16 @@ public class App {
     }
 
     public static void main(String[] args) {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+        ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
         App app = (App) ctx.getBean("app");
 
-        app.logEvent("Some event for user 1");
-        app.logEvent("Some event for user 2");
+//        app.logEvent("Some event for user 1");
+//        app.logEvent("Some event for user 2");
+        ctx.close();
     }
 
-    private void logEvent(String msg) {
-        String message = msg.replaceAll(client.getId(), client.getFullName());
-        consoleEventLogger.logEvent(message);
+    private void logEvent(Event event) {
+//        String message = msg.replaceAll(client.getId(), client.getFullName());
+        consoleEventLogger.logEvent(event);
     }
 }
