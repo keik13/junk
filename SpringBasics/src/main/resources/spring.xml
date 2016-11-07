@@ -7,6 +7,7 @@
     <bean id="client" class="com.yet.spring.core.beans.Client">
         <constructor-arg index="0" value="1"/>
         <constructor-arg index="1" value="John Smith"/>
+        <property name="greeting" value="Hello bro"/>
     </bean>
     <bean id="event" class="com.yet.spring.core.events.Event" scope="prototype">
         <constructor-arg>
@@ -16,7 +17,13 @@
     </bean>
     <bean id="app" class="com.yet.spring.core.App">
         <constructor-arg index="0" ref="client"/>
-        <constructor-arg index="1" ref="consoleEventLogger"/>
+        <constructor-arg index="1" ref="cacheFileEventLogger"/>
+        <constructor-arg>
+            <map>
+                <entry key="INFO" value-ref="consoleEventLogger"/>
+                <entry key="ERROR" value-ref="combinedEventLogger"/>
+            </map>
+        </constructor-arg>
     </bean>
     <bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
 </beans>
