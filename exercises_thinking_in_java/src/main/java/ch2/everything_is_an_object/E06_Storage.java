@@ -1,4 +1,4 @@
-package ch2.EverythingIsanObject;
+package ch2.everything_is_an_object;
 
 /**
  * Write a program that includes and calls the storage( ) method defined as a code fragment in this chapter.

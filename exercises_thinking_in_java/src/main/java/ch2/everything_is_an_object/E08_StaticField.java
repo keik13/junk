@@ -1,4 +1,4 @@
-package ch2.EverythingIsanObject;
+package ch2.everything_is_an_object;
 
 /**
  * Write a program that demonstrates that, no matter how many objects you create of a particular class,

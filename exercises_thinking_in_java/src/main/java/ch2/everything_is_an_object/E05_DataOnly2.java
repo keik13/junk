@@ -1,4 +1,4 @@
-package ch2.EverythingIsanObject;
+package ch2.everything_is_an_object;
 
 /**
  * Modify the previous exercise so that the values of the data in DataOnly are assigned to and printed in main( ).

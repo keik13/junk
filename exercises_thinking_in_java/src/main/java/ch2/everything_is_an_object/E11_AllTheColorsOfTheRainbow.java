@@ -1,4 +1,4 @@
-package ch2.EverythingIsanObject;
+package ch2.everything_is_an_object;
 
 /**
  * Turn the AllTheColorsOfTheRainbow example into a program that compiles and runs.

@@ -1,4 +1,4 @@
-package ch2.EverythingIsanObject;
+package ch2.everything_is_an_object;
 
 /**
  * Find the code fragments involving ATypeName and turn them into a program that compiles and runs.
