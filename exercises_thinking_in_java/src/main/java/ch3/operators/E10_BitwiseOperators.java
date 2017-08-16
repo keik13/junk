@@ -12,8 +12,8 @@ package ch3.operators;
 
 public class E10_BitwiseOperators {
     public static void main(String[] args) {
-        int a = 0b1010101010;
-        int b = 0b0101010101;
+        int a = 0x10;
+        int b = 0x01;
 
         System.out.println("a - " + Integer.toBinaryString(a));
         System.out.println("b - " + Integer.toBinaryString(b));
