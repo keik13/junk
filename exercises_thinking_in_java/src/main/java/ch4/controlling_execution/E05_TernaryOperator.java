@@ -6,6 +6,15 @@ package ch4.controlling_execution;
  */
 public class E05_TernaryOperator {
     public static void main(String[] args) {
+        int a = 0x10;
+        int b = 0x01;
 
+        System.out.println("a - " + bitwiseTest(a));
+        System.out.println("b - " + bitwiseTest(b));
+    }
+
+    static String bitwiseTest(int i) {
+
+        return "";
     }
 }

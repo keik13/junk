@@ -12,11 +12,13 @@ package ch3.operators;
 
 public class E10_BitwiseOperators {
     public static void main(String[] args) {
-        int a = 0x10;
-        int b = 0x01;
+        int a = 0x3;
+        int b = 0x10;
 
         System.out.println("a - " + Integer.toBinaryString(a));
         System.out.println("b - " + Integer.toBinaryString(b));
+
+
         System.out.println("a >> b - " + Integer.toBinaryString(a >> b));
         System.out.println("a << b - " + Integer.toBinaryString(a << b));
         System.out.println("a >>> b - " + Integer.toBinaryString(a >>> b));
