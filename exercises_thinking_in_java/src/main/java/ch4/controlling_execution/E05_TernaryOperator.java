@@ -6,15 +6,29 @@ package ch4.controlling_execution;
  */
 public class E05_TernaryOperator {
     public static void main(String[] args) {
-        int a = 0x10;
-        int b = 0x01;
+        int a = 0x3;
+        int b = 0x10;
 
         System.out.println("a - " + bitwiseTest(a));
         System.out.println("b - " + bitwiseTest(b));
+
+        System.out.println("a >> b - " + bitwiseTest(a >> b));
+        System.out.println("a << b - " + bitwiseTest(a << b));
+        System.out.println("a >>> b - " + bitwiseTest(a >>> b));
+        System.out.println("a & b - " + bitwiseTest(a & b));
+        System.out.println("a | b - " + bitwiseTest(a | b));
+        System.out.println("a ^ b - " + bitwiseTest(a ^ b));
+        System.out.println("~a - " + bitwiseTest(~a));
+        System.out.println("~b - " + bitwiseTest(~b));
     }
 
     static String bitwiseTest(int i) {
-
-        return "";
+        int b = 0x1;
+        StringBuilder s = new StringBuilder(32);
+        while (i != 0) {
+            s = s.append((i & b) == 0 ? "0" : "1");
+            i >>>= 1;
+        }
+        return s.reverse().toString();
     }
 }
