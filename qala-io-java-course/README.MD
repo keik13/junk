@@ -1,0 +1,1 @@
+Exercises from github based course https://github.com/qala-io/java-course
