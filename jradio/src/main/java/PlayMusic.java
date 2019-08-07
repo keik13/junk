@@ -7,7 +7,7 @@ import java.net.URL;
 /**
  * Simple internet radio ^_^
  *
- * @author Andrey Koba)
+ * @author Andrey Koba
  */
 
 public class PlayMusic {
