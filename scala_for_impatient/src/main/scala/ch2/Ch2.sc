@@ -57,4 +57,14 @@ prodRec("Hello")
 prodTailRec("Hello")
 
 //10
-//def xN(x: Int, n: Int)
+def xN(x: Double, n: Int): Double = {
+  if(n == 0) 1
+  else if(n > 0 && n % 2 == 1) x * xN(x, n-1)
+  else if(n < 0) 1 / xN(x, -n)
+  else xN(x, n / 2 ) * xN(x, n / 2)
+}
+printf("2^2=%f\n", xN(2, 2))
+printf("10^9=%f\n",xN(10, 9))
+printf("3^3=%f\n", xN(3, 3))
+printf("2^-1=%f\n",xN(2, -1))
+printf("5^0=%f\n", xN(5, 0))
