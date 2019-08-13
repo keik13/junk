@@ -48,9 +48,10 @@ def prodRec(s: String): Long = {
 def prodTailRec(s: String): Long = {
   @annotation.tailrec
   def prod(s: String, acc: Long): Long = {
-    if(s.isEmpty) acc
+    if (s.isEmpty) acc
     else prod(s.tail, s.head * acc)
   }
+
   prod(s, 1L)
 }
 prodRec("Hello")
@@ -58,13 +59,31 @@ prodTailRec("Hello")
 
 //10
 def xN(x: Double, n: Int): Double = {
-  if(n == 0) 1
-  else if(n > 0 && n % 2 == 1) x * xN(x, n-1)
-  else if(n < 0) 1 / xN(x, -n)
-  else xN(x, n / 2 ) * xN(x, n / 2)
+  if (n == 0) 1
+  else if (n > 0 && n % 2 == 1) x * xN(x, n - 1)
+  else if (n < 0) 1 / xN(x, -n)
+  else xN(x, n / 2) * xN(x, n / 2)
 }
 printf("2^2=%f\n", xN(2, 2))
-printf("10^9=%f\n",xN(10, 9))
+printf("10^9=%f\n", xN(10, 9))
 printf("3^3=%f\n", xN(3, 3))
-printf("2^-1=%f\n",xN(2, -1))
+printf("2^-1=%f\n", xN(2, -1))
 printf("5^0=%f\n", xN(5, 0))
+
+//11
+
+import java.time.LocalDate
+
+implicit class DateInterpolator(val sc: StringContext) extends AnyVal {
+  def date(args: Any*): LocalDate = {
+    if (args.size > 3 || sc.parts.size > 4
+      || sc.parts(1) != "-" || sc.parts(2) != "-") throw new IllegalArgumentException("wrong format")
+    else LocalDate.of(args(0).toString.toInt,
+      args(1).toString.toInt,
+      args(2).toString.toInt)
+  }
+}
+
+date"${2019}-${8}-${13}"
+
+
