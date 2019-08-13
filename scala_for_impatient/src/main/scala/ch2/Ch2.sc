@@ -76,11 +76,19 @@ import java.time.LocalDate
 
 implicit class DateInterpolator(val sc: StringContext) extends AnyVal {
   def date(args: Any*): LocalDate = {
-    if (args.size > 3 || sc.parts.size > 4
-      || sc.parts(1) != "-" || sc.parts(2) != "-") throw new IllegalArgumentException("wrong format")
-    else LocalDate.of(args(0).toString.toInt,
-      args(1).toString.toInt,
-      args(2).toString.toInt)
+    val catchException: PartialFunction[Throwable, LocalDate] = {
+      case _: NumberFormatException => println("is not Int"); LocalDate.now()
+      case e: IllegalArgumentException => println(e.getMessage); LocalDate.now()
+    }
+    try {
+      if (args.size > 3 || sc.parts.size > 4
+        || sc.parts(1) != "-" || sc.parts(2) != "-") throw new IllegalArgumentException("wrong format")
+      else LocalDate.of(args(0).toString.toInt,
+        args(1).toString.toInt,
+        args(2).toString.toInt)
+    } catch {
+      catchException
+    }
   }
 }
 
