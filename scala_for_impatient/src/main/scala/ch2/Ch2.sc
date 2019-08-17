@@ -93,5 +93,3 @@ implicit class DateInterpolator(val sc: StringContext) extends AnyVal {
 }
 
 date"${2019}-${8}-${13}"
-
-
