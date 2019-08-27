@@ -83,7 +83,8 @@ implicit class DateInterpolator(val sc: StringContext) extends AnyVal {
     try {
       if (args.size > 3 || sc.parts.size > 4
         || sc.parts(1) != "-" || sc.parts(2) != "-") throw new IllegalArgumentException("wrong format")
-      else LocalDate.of(args(0).toString.toInt,
+      else LocalDate.of(
+        args(0).toString.toInt,
         args(1).toString.toInt,
         args(2).toString.toInt)
     } catch {
