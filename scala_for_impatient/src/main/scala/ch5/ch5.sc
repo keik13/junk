@@ -10,7 +10,7 @@ class Counter {
 }
 
 //2
-class BankAccount {
+class BankAccountt {
   private var value: BigDecimal = 0
 
   def balance = value
