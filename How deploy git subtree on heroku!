@@ -1,0 +1,7 @@
+How deploy git subtree on heroku!
+
+1.heroku login
+2.heroku create  (from root git rep, not subtree)
+3.git subtree split --prefix chapter-up-and-running master (This will (after a lot of numbers) return a token, e.g.)
+4.git push heroku de7c595cfdba06d0f029ecdc7eaf53e7c48cb67c:refs/heads/master --force
+
